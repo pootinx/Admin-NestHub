@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="property_types">
+        <item>Office</item>
+        <item>Home</item>
+        <item>Room</item>
+        <item>Villa</item>
+    </array>
+    <array name="duration">
+        <item>Mounth</item>
+        <item>Day</item>
+    </array>
+    <array name="available">
+        <item>Yes</item>
+        <item>No</item>
+    </array>
+</resources>
+
+
+
