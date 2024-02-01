@@ -8,7 +8,7 @@ Welcome to the NestHub Admin Back-End repository! This back-end system is design
 
 - **For Admins:**
   - Manage property listings and rental applications.
-  - Monitor and track appointments between homeowners and tenants.
+  - Mnage Reservations
   - Receive real-time updates about property status and user interactions.
   - Efficiently handle property-related tasks through online access.
 
