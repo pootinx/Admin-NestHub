@@ -1,5 +1,6 @@
 package com.example.admin_nesthub;
 
+import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,6 +27,11 @@ import com.example.nesthub.models.HouseModel;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.BreakIterator;
+import java.util.Locale;
+import java.util.Calendar;
+
+
 public class AddProperty extends AppCompatActivity {
 
     static final int PICK_IMAGE_REQUEST = 1;
@@ -35,6 +42,13 @@ public class AddProperty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_property);
 
+        TextInputEditText availabilityEditText = findViewById(R.id.availability);
+        availabilityEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
 
         MaterialButton addButton = findViewById(R.id.btnadd);
 
@@ -142,6 +156,34 @@ public class AddProperty extends AppCompatActivity {
         }
     }
 
+    private void showDatePickerDialog() {
+        TextInputEditText availabilityEditText = findViewById(R.id.availability);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                AddProperty.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        // Handle the selected date (year, month, dayOfMonth)
+                        String selectedDate = String.format(Locale.US, "%04d-%02d-%02d", year, month + 1, dayOfMonth);
+
+                        // Ensure availabilityEditText is initialized before using setText
+                        if (availabilityEditText != null) {
+                            availabilityEditText.setText(selectedDate);
+                        }
+                    }
+                },
+                // Set the initial date (optional)
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePickerDialog.show();
+    }
+
+
+
     private void saveDataToFirestore(String imageUrl) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -151,6 +193,7 @@ public class AddProperty extends AppCompatActivity {
         TextInputEditText descriptionEditText = findViewById(R.id.descriptio);
         TextInputEditText locationEditText = findViewById(R.id.location);
         TextInputEditText priceEditText = findViewById(R.id.price);
+        TextInputEditText currencyEditText = findViewById(R.id.currency);
 
         AutoCompleteTextView propertyTypeAutoComplete = findViewById(R.id.autoCompletePropertyType);
         AutoCompleteTextView durationAutoComplete = findViewById(R.id.autoCompleteDuration);
@@ -164,7 +207,7 @@ public class AddProperty extends AppCompatActivity {
                 titleEditText.getText().toString(),
                 availabilityEditText.getText().toString(),
                 selectedPropertyType,
-                "USD",  // Set currency as needed
+                currencyEditText.getText().toString(),
                 descriptionEditText.getText().toString(),
                 selectedDuration,
                 locationEditText.getText().toString(),

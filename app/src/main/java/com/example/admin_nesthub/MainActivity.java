@@ -40,8 +40,28 @@ public class MainActivity extends AppCompatActivity {
         viewPropertyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle the button click to open the AddProperty activity
+                // Handle the button click to open the ViewProperties activity
                 Intent intent = new Intent(MainActivity.this, ViewProperties.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView viewUsersButton = findViewById(R.id.users);
+        viewUsersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the button click to open the ViewUsersActivity
+                Intent intent = new Intent(MainActivity.this, ViewUsersActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        CardView reservationsButton = findViewById(R.id.reservations);
+        reservationsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Handle the button click to open the ViewUsersActivity
+                Intent intent = new Intent(MainActivity.this, ReservationsActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,7 @@
 package com.example.nesthub.models;
 
 public class HouseModel {
+    private String documentId; // Add this field
     String title,availability,category,currency,description,duration,location,url_image;
     String price;
     Boolean available;
@@ -10,6 +11,7 @@ public class HouseModel {
 
     public HouseModel(String title, String availability, String category, String currency, String description, String duration, String location, String url_image, String price, Boolean available) {
         this.title = title;
+        this.documentId = documentId;
         this.availability = availability;
         this.category = category;
         this.currency = currency;
@@ -19,6 +21,13 @@ public class HouseModel {
         this.url_image = url_image;
         this.price = price;
         this.available = available;
+    }
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public String getTitle() {
